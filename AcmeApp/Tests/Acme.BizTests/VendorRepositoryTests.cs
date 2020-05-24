@@ -78,5 +78,25 @@ namespace Acme.Biz.Tests
 
 
         }
+
+        [TestMethod]
+        public void RetrieveDictionarybyKey()
+        {
+            //arrange
+            var vendorRepo = new VendorRepository();
+            var expected = new Dictionary<string, Vendor>()
+            {
+                { "Endava", new Vendor() { CompanyName = "Endava", Email = "mail@dava.com", VendorId = 1 }
+                }
+            };
+            var vendor1 = new Vendor() { CompanyName = "NTT", Email = "mail@dava.com", VendorId = 2 };
+
+            expected.Add(vendor1.CompanyName, vendor1);
+            //act
+            var act = vendorRepo.RetrieveDictionary();
+
+            CollectionAssert.AreEqual(expected, act);
+            //assert
+        }
     }
 }

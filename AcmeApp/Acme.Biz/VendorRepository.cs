@@ -10,6 +10,9 @@ namespace Acme.Biz
     {
         List<Vendor> vendors = null;
 
+        Dictionary<string, Vendor> vendorDictionary = null;
+
+
        public List<Vendor> Retrieve()
         {
             if (vendors == null)
@@ -20,6 +23,43 @@ namespace Acme.Biz
             return vendors;            
 
         }
+
+        public Dictionary<string, Vendor> RetrieveDictionary()
+        {
+            var vendor = new Vendor() { CompanyName = "Endava", Email = "mail@dava.com", VendorId = 1 };
+            var vendor1 = new Vendor() { CompanyName = "NTT", Email = "mail@dava.com", VendorId = 2 };
+            if (vendorDictionary == null)
+
+           vendorDictionary = new Dictionary<string, Vendor>();
+
+            vendorDictionary.Add(vendor.CompanyName, vendor);
+            vendorDictionary.Add(vendor1.CompanyName, vendor1);
+
+            foreach(var item in vendorDictionary.Keys)
+            {
+                Console.WriteLine(item);
+            }
+
+            //foreach(var item in vendorDictionary.Values)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+
+            //foreach(var item in vendorDictionary)
+            //{
+            //    var key = item.Key;
+            //    var value = item.Value;
+
+            //    Console.WriteLine($" {key}, {value}");
+            //}
+
+
+            //Console.WriteLine(vendorDictionary["Endava"]);
+            return vendorDictionary;             
+
+        }
+
 
         /// <summary>
         /// Retrieve one vendor.

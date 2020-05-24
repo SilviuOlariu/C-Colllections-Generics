@@ -16,6 +16,7 @@ namespace Acme.Biz
         #region Constructors
         public Product()
         {
+            #region GenericList
             //ways of definning array
             //var colorOptions = new string[3] { "green", "white", "yellow" };
             //string[] colorOption = new string[3];
@@ -41,7 +42,19 @@ namespace Acme.Biz
             //{
             //    Console.WriteLine(x);
             //}
-            
+            #endregion
+
+            #region GenericDictionary
+
+            var states = new Dictionary<string, string>();
+            states.Add("NY", "New York");
+            states.Add("CA", "California");
+
+            foreach (var item in states)
+            {
+                Console.WriteLine(item);
+            }
+            #endregion
         }
         public Product(int productId,
                         string productName,
