@@ -8,6 +8,19 @@ namespace Acme.Biz
 {
     public class VendorRepository
     {
+        List<Vendor> vendors = null;
+
+       public List<Vendor> Retrieve()
+        {
+            if (vendors == null)
+
+                vendors = new List<Vendor>();
+            vendors.Add(new Vendor() { CompanyName = "Endava", Email = "mail@dava.com", VendorId = 1 });
+
+            return vendors;            
+
+        }
+
         /// <summary>
         /// Retrieve one vendor.
         /// </summary>
@@ -51,5 +64,7 @@ namespace Acme.Biz
 
             return success;
         }
+
+        
     }
 }

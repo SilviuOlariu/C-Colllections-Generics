@@ -23,7 +23,7 @@ namespace Acme.Biz.Tests
             var expectedMessage = "succesfull";
 
             // Act
-            var actual = currentProduct.CalculateSuggestedPrice(10m);
+            var actual = currentProduct.CalculateSuggestedPrice(0.10m);
 
             // Assert
             Assert.AreEqual(expected, actual.Success);

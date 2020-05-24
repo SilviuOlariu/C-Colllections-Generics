@@ -19,13 +19,28 @@ namespace Acme.Biz
             //ways of definning array
             //var colorOptions = new string[3] { "green", "white", "yellow" };
             //string[] colorOption = new string[3];
-            string[] colorOptions = { "green", "white", "yellow" };
-            
+            //  string[] colorOptions = { "green", "white", "yellow" };           
             //foreach(var i in colorOptions)
             //{
             //  Console.WriteLine(i);
             //}
             //var index = Array.IndexOf(colorOptions, "yellow");
+
+            //  var  
+
+            //List<string> str = new List<string>();
+            //// var str = new List<string> { "first", "second" };
+            //str.Add("green");
+            //str.Add("black");
+            //str.Add("yellow");
+            //str.Insert(2, "orange");
+
+            //var contains = str.Contains("green");
+
+            //foreach(var x in str)
+            //{
+            //    Console.WriteLine(x);
+            //}
             
         }
         public Product(int productId,
@@ -98,17 +113,19 @@ namespace Acme.Biz
         public OperationResult<decimal> CalculateSuggestedPrice(decimal markupPercent)
         {
             string message = "";
-            decimal price = 0;
-            if(markupPercent <10)
+           
+            if(markupPercent <0.10m)
             {
                 message = "need higher value";
                 
             }
             else
             {
-                price = this.Cost + (this.Cost * markupPercent);
+              
                 message = "succesfull";
             }
+            decimal price = this.Cost + (this.Cost * markupPercent);
+
             return new OperationResult<decimal>(price, message);
                 
         }

@@ -26,6 +26,46 @@ namespace Acme.Biz.Tests
         }
 
         [TestMethod]
+        public void RetrieveVendors()
+        {
+            //arrange
+
+            var vendor = new VendorRepository();
+            var vendors = new List<Vendor>();
+            vendors.Add(new Vendor() { CompanyName = "Endava", Email = "mail@dava.com", VendorId = 1 });
+            var expected = 1;
+            //act
+            var act = vendor.Retrieve();
+
+            //assert
+
+            Assert.AreEqual(expected, act.Count());
+            
+
+        }
+
+        [TestMethod]
+        public void RetrieveVendor()
+        {
+            //arrange
+            var repo = new VendorRepository();
+
+            var vendor = new Vendor() { CompanyName = "Endava", Email = "mail@dava.com", VendorId = 1 };
+
+            var expected = new List<Vendor>();
+            expected.Add(vendor);
+
+            //act
+            var act = repo.Retrieve();
+
+            //assert
+
+            CollectionAssert.AreEqual(expected, act);
+
+        }
+
+
+        [TestMethod]
         public void RetrieveStringcValue()
         {
             var repo = new VendorRepository();
