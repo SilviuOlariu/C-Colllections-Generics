@@ -128,5 +128,47 @@ namespace Acme.Biz.Tests
 
         }
 
+        [TestMethod]
+        public void RetrieveAllVendors()
+        {
+            var repo = new VendorRepository();
+            var expected = new List<Vendor>()
+            {new Vendor{CompanyName="Evozon", Email="mail@evozon.com:=",VendorId =1},
+             new Vendor(){CompanyName="Vision", Email="mail@vision.com:=",VendorId =3}
+            };
+            var vendorList = repo.RetrieveAll();
+
+            //var customList = from v in vendorList
+            //                 where v.CompanyName.Contains("on")
+            //                 orderby v.VendorId
+            //                 select v;
+
+            //customList = (from v in vendorList
+            //              where v.VendorId == 1
+            //              select v).ToList();
+
+            //var customList = vendorList.Where(FilterVendor)
+            //                            .OrderBy(OrderVendorById);
+
+
+            var customList = vendorList.Where(v => v.CompanyName.Contains("on"))
+                                       .OrderBy(v => v.VendorId);
+                                       
+
+            CollectionAssert.AreEqual(customList.ToList(), expected);
+        }
+
+        private bool FilterVendor(Vendor vendor)
+        {
+            if (vendor.CompanyName.Contains("on"))
+            {
+                return true;
+            }
+            return false;
+        }
+        private int OrderVendorById(Vendor vendor) => vendor.VendorId;
+
+        
+
     }
 }

@@ -124,7 +124,20 @@ namespace Acme.Biz
 
         }
 
-        
+        public IEnumerable<Vendor> RetrieveAll()
+        {
+            var vendors = new List<Vendor>()
+            {new Vendor{CompanyName="Evozon", Email="mail@evozon.com:=",VendorId =1},
+             new Vendor(){CompanyName="Asist", Email="mail@asists.com:=",VendorId =2},
+             new Vendor(){CompanyName="Vision", Email="mail@vision.com:=",VendorId =3},
+             new Vendor(){CompanyName="Tehno", Email="mail@tehno.com:=",VendorId =4},
+             new Vendor(){CompanyName="Beazley", Email="mail@beazley.com:=",VendorId =5},
+             new Vendor(){CompanyName="Unirisx", Email="mail@unirisx.com:=",VendorId =6},
+             new Vendor(){CompanyName="Metro", Email="mail@metro.com:=",VendorId =7}
+            };
+
+            return vendors;
+        }
 
     }
 }
