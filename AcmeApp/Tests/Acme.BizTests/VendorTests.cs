@@ -142,5 +142,29 @@ namespace Acme.Biz.Tests
             // Assert
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void EmailSentFromVendor()
+        {
+            //  var vendors = new List<Vendor>();
+            //  var vendor = new Vendor() { CompanyName = "Endava", Email = "mail@dava.com", VendorId = 1 };
+            //  var vendor1 = new Vendor() { CompanyName = "NTT", Email = "mail@dava.com", VendorId = 2 };
+            //  vendors.Add(vendor);
+            //  vendors.Add(vendor1);
+
+            //  var vendor = new Vendor();
+            var repo = new VendorRepository();
+            var vendors = repo.Retrieve();
+            var listOfEmail = new List<string>();
+
+            listOfEmail.Add("Message sent: Important message for: Endava");
+            listOfEmail.Add("Message sent: Important message for: NTT");
+
+            var act = Vendor.SendGenericEmail(vendors, "stuff");
+
+            CollectionAssert.AreEqual(listOfEmail, act);
+        }
+
+       
     }
 }

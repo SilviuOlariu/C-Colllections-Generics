@@ -84,6 +84,21 @@ namespace Acme.Biz
                                                         this.Email);
             return confirmation;
         }
+        
+        public static  List<string> SendGenericEmail(ICollection<Vendor> vendors, string message)
+        {
+            var confirmations = new List<string>();
+            var service = new EmailService();
+            foreach (var item in vendors)
+            {
+                var subject = "Important message for: "+ item.CompanyName;
+               var confirmation = service.SendMessage(subject, message, item.Email);
+                confirmations.Add(confirmation);
+            }
+           
+            return confirmations;
+
+        }
 
         public override bool Equals(object obj)
         {
@@ -91,8 +106,7 @@ namespace Acme.Biz
 
             if (objToCompare != null)
 
-                if (this.CompanyName == objToCompare.CompanyName
-                    && this.VendorId == objToCompare.VendorId)
+                if (this.CompanyName == objToCompare.CompanyName)
                     return true;
             return base.Equals(obj);
         }

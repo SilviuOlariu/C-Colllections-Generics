@@ -13,18 +13,19 @@ namespace Acme.Biz
         Dictionary<string, Vendor> vendorDictionary = null;
 
 
-       public List<Vendor> Retrieve()
+       public ICollection<Vendor> Retrieve()
         {
             if (vendors == null)
 
                 vendors = new List<Vendor>();
             vendors.Add(new Vendor() { CompanyName = "Endava", Email = "mail@dava.com", VendorId = 1 });
+            vendors.Add(new Vendor() { CompanyName = "NTT", Email = "mail@dava.com", VendorId = 2 });
 
             return vendors;            
-
+            
         }
 
-        public Dictionary<string, Vendor> RetrieveDictionary()
+        public IDictionary<string, Vendor> RetrieveDictionary()
         {
             var vendor = new Vendor() { CompanyName = "Endava", Email = "mail@dava.com", VendorId = 1 };
             var vendor1 = new Vendor() { CompanyName = "NTT", Email = "mail@dava.com", VendorId = 2 };
@@ -90,6 +91,8 @@ namespace Acme.Biz
             return defaultValue;
 
         }
+       
+        
 
         /// <summary>
         /// Save data for one vendor.
@@ -105,6 +108,23 @@ namespace Acme.Biz
             return success;
         }
 
+
+        public IEnumerable<Vendor> RetrieveWithIterator()
+        {
+            //vendors = new List<Vendor>();
+            //  vendors.Retrieve();
+
+            this.Retrieve();
+
+            foreach( var item in vendors)
+            {
+                Console.WriteLine($"Vendor id {item.VendorId}");
+                yield return item;
+            }
+
+        }
+
         
+
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace Acme.Biz.Tests
 {
@@ -33,7 +34,8 @@ namespace Acme.Biz.Tests
             var vendor = new VendorRepository();
             var vendors = new List<Vendor>();
             vendors.Add(new Vendor() { CompanyName = "Endava", Email = "mail@dava.com", VendorId = 1 });
-            var expected = 1;
+            vendors.Add( new Vendor() { CompanyName = "NTT", Email = "mail@dava.com", VendorId = 2 });
+            var expected = 2;
             //act
             var act = vendor.Retrieve();
 
@@ -51,16 +53,18 @@ namespace Acme.Biz.Tests
             var repo = new VendorRepository();
 
             var vendor = new Vendor() { CompanyName = "Endava", Email = "mail@dava.com", VendorId = 1 };
+            var vendor1 = new Vendor() { CompanyName = "NTT", Email = "mail@dava.com", VendorId = 2 };
 
             var expected = new List<Vendor>();
             expected.Add(vendor);
+            expected.Add(vendor1);
 
             //act
             var act = repo.Retrieve();
 
             //assert
 
-            CollectionAssert.AreEqual(expected, act);
+            CollectionAssert.AreEqual(expected, act.ToList());
 
         }
 
@@ -95,8 +99,34 @@ namespace Acme.Biz.Tests
             //act
             var act = vendorRepo.RetrieveDictionary();
 
-            CollectionAssert.AreEqual(expected, act);
+            CollectionAssert.AreEqual(expected, act.ToList());
             //assert
         }
+
+        [TestMethod]
+        public void RetrieveIterator()
+        {
+            var repository = new VendorRepository();
+            var expected = new List<Vendor>();
+
+            var vendor = new Vendor() { CompanyName = "Endava", Email = "mail@dava.com", VendorId = 1 };
+            var vendor1 = new Vendor() { CompanyName = "NTT", Email = "mail@dava.com", VendorId = 2 };
+
+            expected.Add(vendor);
+            expected.Add(vendor1);
+
+            var actual = new List<Vendor>();
+            var vendorIteration = repository.RetrieveWithIterator();
+
+            foreach (var item in vendorIteration)
+            {
+                Console.WriteLine(item);
+                actual.Add(item);
+            }
+ 
+            CollectionAssert.AreEqual(expected, actual);
+
+        }
+
     }
 }
